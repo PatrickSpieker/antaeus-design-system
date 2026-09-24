@@ -34,3 +34,9 @@ Tokens establish shared design intent. They do not override accessibility settin
 ## Updates
 
 Only the latest definitions are published. There are no versioned endpoint paths or compatibility aliases; Git retains history. Fetch the current JSON and needed guidance together when applying the design system. Publication uses a five-minute browser cache, so recently deployed updates may take that long to appear in an existing cache.
+
+## Roles and device-dependent values
+
+Use `font-heading`, `font-body`, and `font-mono` for type roles. The former `font-serif` token is removed; `font-sans` now aliases `font-body` (Inter). Font names do not trigger downloads.
+
+The control and tap-target tokens are logical minimum baselines. `tabbar-control-h` supplies only the content height: web adds `env(safe-area-inset-bottom)`, while iOS uses its native safe-area inset. Device-dependent expressions do not belong in platform-neutral JSON.

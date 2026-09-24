@@ -8,7 +8,7 @@ The product is serious when needed, calm and delightful otherwise. It is neither
 
 ## Design posture
 
-Use generous whitespace, deep plum accents, warm bone surfaces, muted semantic colors, and restrained motion. Serif typography creates occasional editorial moments; sans-serif supports the interface; monospace supports metrics. Avoid decorative clutter, emoji in product chrome, bluish-purple gradients, and generic ornamental motifs.
+Use generous whitespace, deep plum accents, warm bone surfaces, muted semantic colors, and restrained motion. IBM Plex Sans supplies headings and eyebrows; Inter supports body copy and controls; IBM Plex Mono supports metrics. Avoid decorative clutter, emoji in product chrome, bluish-purple gradients, and generic ornamental motifs.
 
 ## Writing
 

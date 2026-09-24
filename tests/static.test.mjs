@@ -19,9 +19,19 @@ test('agreed palette, font and interaction values survive the migration', () => 
   assert.equal(value('dur-hover').value, 140);
   assert.equal(value('dur-press').value, 80);
   assert.equal(value('press-scale'), 0.98);
-  assert.equal(value('font-serif'), 'Faustina');
-  assert.equal(value('font-sans'), 'IBM Plex Sans');
-  assert.equal(value('font-mono'), 'JetBrains Mono');
+  assert(!resolved.has('font-serif'));
+  assert.equal(value('font-heading'), 'IBM Plex Sans');
+  assert.equal(value('font-body'), 'Inter');
+  assert.equal(value('font-sans'), 'Inter');
+  assert.equal(value('font-mono'), 'IBM Plex Mono');
+  assert.equal(value('leading-display'), 1.15);
+  assert.equal(value('control-h').value, 48);
+  assert.equal(value('target-min').value, 44);
+  assert.equal(value('tabbar-control-h').value, 48);
+  assert.equal(value('weight-button'), 600);
+  assert.deepEqual(value('scrim'), { hex: '#1A1814', alpha: 0.24 });
+  assert.deepEqual(value('fg-4'), value('fg-3'));
+  assert.equal(value('ring-focus')[0].opacity, 1);
   for (const [name, token] of resolved) {
     if (!name.startsWith('shadow-')) continue;
     for (const layer of token.value) assert.equal(value(layer.color).hex, '#1A1814');
@@ -33,10 +43,10 @@ test('CSS translates structured units, colors, aliases, timing curves and shadow
   for (const declaration of [
     '--bg-surface: var(--bone-50);', '--space-6: 24px;', '--dur-press: var(--dur-instant);',
     '--dur-instant: 80ms;', '--tracking-display: -0.02em;', '--leading-body: 1.55;',
-    '--font-sans: "IBM Plex Sans";', '--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);',
+    '--font-heading: "IBM Plex Sans";', '--font-body: "Inter";', '--font-sans: var(--font-body);', '--font-mono: "IBM Plex Mono";', '--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);',
     '--glass-bone: rgba(251, 249, 246, 0.78);',
     '--shadow-inset: inset 0px 1px 2px 0px rgba(26, 24, 20, 0.06);',
-    '--ring-focus: 0px 0px 0px 3px rgba(90, 63, 122, 0.28);',
+    '--ring-focus: 0px 0px 0px 3px #5A3F7A;',
   ]) assert(css.includes(declaration), declaration);
   assert.equal((css.match(/\{/g) || []).length, 1);
   assert(!/@import|@font-face|https?:|glass-white/.test(css));
@@ -62,7 +72,7 @@ test('malformed typed values fail before publication', () => {
     ['color', { hex: '#XYZXYZ', alpha: 1 }], ['color', { hex: '#000000', alpha: 2 }],
     ['dimension', { value: 4, unit: 'px' }], ['duration', { value: -1, unit: 'ms' }],
     ['number', '15'], ['tracking', { value: 2, unit: 'px' }],
-    ['cubicBezier', [2, 0, 1, 1]], ['fontFamily', 'Faustina; color:red'], ['unknown', 1],
+    ['cubicBezier', [2, 0, 1, 1]], ['fontFamily', 'Inter; color:red'], ['unknown', 1],
     ['shadow', [{ x: 0, y: 0, blur: 2, spread: 0, opacity: 1, inset: false, color: 'missing' }]],
   ]) assert.throws(() => resolveTokens({ tokens: { invalid: { type, value } } }));
 });
@@ -99,4 +109,27 @@ test('build publishes only the contract, resolves links, and removes stale files
 test('broken documentation links fail validation', () => {
   assert.throws(() => validateLinks({ 'index.md': '[Missing](preview/cards.html)' }, publishedFiles), /Broken publication link/);
   assert.throws(() => validateLinks({ 'guidance/layout.md': '[Internal](../CONTEXT.md)' }, publishedFiles), /Broken publication link/);
+});
+
+
+test('readable text and input borders retain the agreed contrast on supported surfaces', () => {
+  const resolved = resolveTokens(document);
+  const luminance = name => {
+    const { hex, alpha } = resolved.get(name).value;
+    assert.equal(alpha, 1);
+    return hex.slice(1).match(/../g).map(v => parseInt(v, 16) / 255)
+      .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+  };
+  const contrast = (a, b) => {
+    const pair = [luminance(a), luminance(b)].sort((a, b) => b - a);
+    return (pair[0] + 0.05) / (pair[1] + 0.05);
+  };
+  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2', 'bg-sunken']) {
+    assert(contrast('fg-3', bg) >= 4.5, `Readable metadata on ${bg}`);
+  }
+  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2']) {
+    assert(contrast('border-input', bg) >= 3, `Input boundary on ${bg}`);
+  }
+  assert(contrast('fg-inverse', 'plum-500') >= 4.5, 'Primary button label');
 });

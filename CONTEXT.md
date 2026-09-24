@@ -36,6 +36,17 @@ The published entry point is `/index.md`, with `/tokens.json`, `/guidance/…`, 
 - Shadows use warm ink (`#1A1814`), not pure black; prose must match the token definitions.
 - Shared sizes are baselines; iOS uses native control sizing, Dynamic Type, and device safe areas rather than fixed web dimensions.
 
+## Addon decisions retained after restructuring
+
+- Headings and eyebrows use IBM Plex Sans; body and controls use Inter; metrics use IBM Plex Mono. Remove the serif family entirely.
+- Use flat plum primary actions, outlined secondary actions, and text tertiary actions, with one primary action per screen.
+- Default controls are 48 logical units; compact hit targets are at least 44. Tab controls are 48 plus the device's actual safe area, subject to native sizing and text scaling.
+- Use the agreed onboarding spacing table in `guidance/layout.md`, including a reserved back-control row.
+- Keep readable text, stronger input boundaries, visible keyboard focus, exposed selection state, and reduced motion.
+- Menus and sheets use a 24% warm-ink scrim.
+
+These decisions came from reviewing Devin's design addon on September 24, 2026. They live in shared guidance and typed tokens, not reference implementations. Product questions about invite placement, welcome copy, and empty-timeline guidance remain for consuming products.
+
 ## Example dialogue
 
 > **Developer:** "Should the shared design system include an example button implementation?"

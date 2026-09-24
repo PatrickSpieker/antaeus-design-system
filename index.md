@@ -5,7 +5,7 @@ Shared design guidance for web and iOS. Always the latest definitions.
 - [Brand and voice](guidance/brand.md): identity, writing, content rules.
 - [Color and surfaces](guidance/color.md): palette, bone surfaces, glass, shadows.
 - [Typography](guidance/typography.md): font names, type roles, numeric data.
-- [Layout](guidance/layout.md): spacing, radii, borders, platform sizing.
+- [Layout](guidance/layout.md): onboarding rhythm, action hierarchy, accessibility, platform sizing.
 - [Motion](guidance/motion.md): timing, transitions, hover and press feedback.
 - [Iconography](guidance/iconography.md): icon family, strokes, sizes.
 - [Assets](guidance/assets.md): approved logos and usage.

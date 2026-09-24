@@ -32,7 +32,7 @@ The build validates tokens and local Markdown links, clears `dist/`, copies an e
 
 ## Cloudflare
 
-Keep the build command `bash build-static.sh` and deploy command `npx wrangler deploy`. The wrapper delegates to the same Node build used locally. Pushes to the connected production branch publish the latest files; request-time application code is unnecessary.
+Keep the build command `bash build-static.sh` and deploy command `npx wrangler deploy`. The wrapper delegates to the same Node build used locally. Pull-request builds use `npx wrangler preview`, enabled by the `previews` block in `wrangler.jsonc`. Pushes to the connected production branch publish the latest files; request-time application code is unnecessary.
 
 Published routes: `/index.md`, `/SKILL.md`, `/tokens.json`, `/tokens.css`, `/guidance/*.md`, and the logos linked from the assets guide. `/` redirects to `/index.md`. All assets have public CORS and a five-minute browser cache. Unknown files return 404.
 

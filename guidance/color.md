@@ -28,3 +28,7 @@ A light hero may use a subtle bone-to-bone-100-to-plum-50 background wash. Glass
 All shadows use warm ink (`#1A1814`), never pure black. `shadow-xs` through `shadow-md` are soft, close UI shadows; `shadow-lg` and `shadow-xl` elevate floating panels and modals. Avoid hard drop shadows.
 
 Inner shadows are allowed persistently for sunken inputs and temporarily for card presses. [Motion guidance](motion.md) defines interaction timing.
+
+## Menu and sheet overlays
+
+Use `scrim`, warm ink at 24% opacity, behind menus and sheets. It keeps the underlying screen recognizable. Do not use the opaque-looking bone glass surface as an overlay scrim. Surface and glass rules above still apply to the panel itself.

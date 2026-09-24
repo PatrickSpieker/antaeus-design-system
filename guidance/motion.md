@@ -16,7 +16,7 @@ Entrances combine fading with an 8–12 logical-unit translation. Entrances and 
 
 ## Hover and press
 
-- Primary button hover darkens the background by about 8%; ghost hover reveals a background. No button lift or scale on hover.
+- Primary button hover changes `plum-500` to `plum-600`; outlined secondary hover reveals `bg-surface-2`. No button lift or scale on hover.
 - Card hover increases `shadow-sm` to `shadow-md` and lifts by at most one logical unit.
 - Link hover reveals an underline or changes `fg-brand` to `fg-brand-strong`.
 - Button press uses the 80ms scale response without a color change.
