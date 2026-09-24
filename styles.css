@@ -1,6 +1,0 @@
-/* =========================================================================
-   Antaeus Health — Design System entry stylesheet
-   Consumers link this one file; it pulls in all foundations.
-   ========================================================================= */
-@import url('./colors_and_type.css');
-@import url('./controls.css');
