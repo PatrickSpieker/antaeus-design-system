@@ -1,10 +1,11 @@
 {
   "name": "antaeus-design-system",
   "version": "1.0.0",
-  "description": "> Health tools built for the person whose body is actually in question — not the administrator, not the biller, not the billing administrator. Serious when it needs to be; calm and delightful otherwise.",
-  "main": "_ds_bundle.js",
+  "description": "Shared Antaeus design guidance, tokens, font names, and brand assets for web and iOS agents.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "bash build-static.sh",
+    "dev": "npm run build && wrangler dev",
+    "test": "node --test tests/*.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,6 @@
   "homepage": "https://github.com/PatrickSpieker/antaeus-design-system#readme",
   "devDependencies": {
     "wrangler": "^4.138.0"
-  }
+  },
+  "private": true
 }
