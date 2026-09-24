@@ -1,0 +1,24 @@
+{
+  "name": "antaeus-design-system",
+  "version": "1.0.0",
+  "description": "> Health tools built for the person whose body is actually in question — not the administrator, not the biller, not the billing administrator. Serious when it needs to be; calm and delightful otherwise.",
+  "main": "_ds_bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatrickSpieker/antaeus-design-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PatrickSpieker/antaeus-design-system/issues"
+  },
+  "homepage": "https://github.com/PatrickSpieker/antaeus-design-system#readme",
+  "devDependencies": {
+    "wrangler": "^4.138.0"
+  }
+}
