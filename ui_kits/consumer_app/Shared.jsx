@@ -51,37 +51,14 @@ function TabBar({ active = 'home', onChange = () => {} }) {
     { id: 'me',   label: 'You',   icon: 'user' },
   ];
   return (
-    <div style={{
-      position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 40,
-      paddingBottom: 34, paddingTop: 10, paddingLeft: 14, paddingRight: 14,
-      background: 'linear-gradient(to top, rgba(251,249,246,0.98) 40%, rgba(251,249,246,0))',
-      pointerEvents: 'none',
-    }}>
-      <div style={{
-        background: 'rgba(255,255,255,0.82)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        border: '1px solid rgba(26,24,20,0.06)',
-        borderRadius: 22,
-        boxShadow: '0 8px 24px rgba(26,24,20,0.08), 0 2px 6px rgba(26,24,20,0.05)',
-        display: 'flex', padding: 6, pointerEvents: 'auto',
-      }}>
-        {items.map(it => {
-          const isActive = it.id === active;
-          return (
-            <button key={it.id} onClick={() => onChange(it.id)} style={{
-              flex: 1, background: 'none', border: 'none', cursor: 'pointer',
-              padding: '8px 4px', display: 'flex', flexDirection: 'column',
-              alignItems: 'center', gap: 3,
-              color: isActive ? 'var(--plum-500)' : 'var(--fg-3)',
-            }}>
-              <Icon name={it.icon} size={22} stroke={isActive ? 2 : 1.6} />
-              <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: 0.02 }}>{it.label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <nav className="app-tabbar" aria-label="Main navigation">
+      {items.map(it => (
+        <button key={it.id} type="button" aria-current={it.id === active ? 'page' : undefined} onClick={() => onChange(it.id)}>
+          <Icon name={it.icon} size={22} stroke={1.5} />
+          <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
+        </button>
+      ))}
+    </nav>
   );
 }
 
@@ -89,7 +66,7 @@ function ScreenHeader({ eyebrow, title, subtitle }) {
   return (
     <div style={{ padding: '18px 4px 12px' }}>
       {eyebrow && <div className="eyebrow-sm" style={{ marginBottom: 10 }}>{eyebrow}</div>}
-      <div className="serif-moment" style={{ fontSize: 34 }}>{title}</div>
+      <div className="heading-moment" style={{ fontSize: 34 }}>{title}</div>
       {subtitle && <div style={{ fontSize: 14, color: 'var(--fg-2)', marginTop: 10, lineHeight: 1.5 }}>{subtitle}</div>}
     </div>
   );

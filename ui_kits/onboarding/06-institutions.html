@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antaeus Health onboarding, Institutions</title>
+<!-- Heading and body faces come from colors_and_type.css through the role variables in addon.css. No family is named in this file. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../addon.css">
+</head>
+<body>
+<div class="screen">
+  <nav class="top">
+    <button class="top-text" type="button">Edit profile</button>
+  </nav>
+  <main class="form">
+    <p class="eyebrow">Antaeus Health</p>
+    <h1 class="display-s">Choose your institutions</h1>
+    <p class="lede">Search for your hospital or clinic. You can connect your records later.</p>
+    <label class="field">
+      <input type="search" autocomplete="off" value="Stanford" aria-label="Search for your hospital or clinic">
+    </label>
+    <p class="label" id="selected-label">Selected institutions</p>
+    <ul class="list" role="listbox" aria-labelledby="selected-label">
+      <li class="row" role="option" aria-selected="true"><span>Stanford Health Care</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></li>
+    </ul>
+    <button class="btn btn-primary" type="button">Continue</button>
+    <button class="btn btn-ghost" type="button">Skip for now</button>
+  </main>
+</div>
+</body>
+</html>

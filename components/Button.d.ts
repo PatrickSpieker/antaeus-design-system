@@ -1,6 +1,6 @@
 export interface ButtonProps {
   /** Visual style. */
-  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'tertiary' | 'destructive';
   /** Size preset. */
   size?: 'sm' | 'md' | 'lg';
   /** Disable interaction. */

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Antaeus Health onboarding, all eight screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../addon.css">
+<style>
+  /* Gallery page, not a screen: a --bone-200 canvas with the eight frames in one row */
+  body { background: var(--bone-200); padding: var(--space-6); width: max-content; color: var(--fg-2); }
+  .gallery { display: flex; gap: var(--space-6); align-items: flex-start; }
+  .cell { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cell-label { font-size: var(--text-caption); font-weight: 500; line-height: var(--leading-tight); color: var(--fg-2); }
+  .frame { width: var(--frame-w); height: var(--frame-h); border: 0; display: block; background: var(--bg-page); }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="cell"><div class="cell-label">01 Welcome</div><iframe class="frame" src="01-welcome.html" title="01 Welcome" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">02 Phone</div><iframe class="frame" src="02-phone.html" title="02 Phone" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">03 Code</div><iframe class="frame" src="03-code.html" title="03 Code" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">04 Invite code</div><iframe class="frame" src="04-invite.html" title="04 Invite code" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">05 Name and date of birth</div><iframe class="frame" src="05-name-dob.html" title="05 Name and date of birth" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">06 Institutions</div><iframe class="frame" src="06-institutions.html" title="06 Institutions" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">07 Home timeline</div><iframe class="frame" src="07-home.html" title="07 Home timeline" scrolling="no"></iframe></div>
+  <div class="cell"><div class="cell-label">08 Account menu</div><iframe class="frame" src="08-account-menu.html" title="08 Account menu" scrolling="no"></iframe></div>
+</div>
+</body>
+</html>

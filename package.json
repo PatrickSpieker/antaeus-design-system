@@ -4,7 +4,8 @@
   "description": "> Health tools built for the person whose body is actually in question — not the administrator, not the biller, not the billing administrator. Serious when it needs to be; calm and delightful otherwise.",
   "main": "_ds_bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && node scripts/check-design.cjs",
+    "build": "node scripts/build-previews.cjs && bash build-static.sh"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/PatrickSpieker/antaeus-design-system#readme",
   "devDependencies": {
+    "esbuild": "0.28.1",
     "wrangler": "^4.138.0"
   }
 }

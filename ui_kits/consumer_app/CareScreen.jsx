@@ -17,7 +17,7 @@ function CareScreen() {
       <Card style={{ padding: 0, marginBottom: 18 }}>
         {team.map((p, i) => (
           <div key={p.name} style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 14, borderTop: i === 0 ? 'none' : '1px solid var(--border-hairline)' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 22, background: 'var(--plum-100)', color: 'var(--plum-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: 18 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 22, background: 'var(--plum-100)', color: 'var(--plum-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)', fontSize: 18 }}>
               {p.initials}
             </div>
             <div style={{ flex: 1 }}>
@@ -66,11 +66,11 @@ function YouScreen() {
               <Icon name={r.icon} size={16}/>
             </div>
             <div style={{ flex: 1, fontSize: 14 }}>{r.label}</div>
-            <Icon name="chevronR" size={16} color="var(--fg-4)"/>
+            <Icon name="chevronR" size={16} color="var(--fg-3)"/>
           </div>
         ))}
       </Card>
-      <button style={{ width: '100%', background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '14px', fontSize: 14, fontWeight: 500, color: 'var(--clay-500)', cursor: 'pointer' }}>Sign out</button>
+      <button className="btn btn-secondary" style={{ width: '100%' }}>Sign out</button>
     </div>
   );
 }

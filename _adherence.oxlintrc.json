@@ -35,16 +35,16 @@
         "message": "Raw px value — use a design-system spacing token via var()."
       },
       {
-        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Faustina|IBM Plex Sans|JetBrains Mono))/i]",
-        "message": "Font not provided by the design system. Available: Faustina, IBM Plex Sans, JetBrains Mono."
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:IBM Plex Sans|Inter|IBM Plex Mono|var\\())/i]",
+        "message": "Use design-system role tokens: --font-heading, --font-body, --font-mono."
       },
       {
         "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|disabled|onClick|children|key|ref|className|style|children)$/]",
         "message": "<Button> doesn't accept that prop. Declared props: variant, size, disabled, onClick, children."
       },
       {
-        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost|destructive)$/]",
-        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost' | 'destructive'."
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost|tertiary|destructive)$/]",
+        "message": "<Button> variant must be primary, secondary, ghost, tertiary, or destructive."
       },
       {
         "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
@@ -83,10 +83,12 @@
       "--bone-50",
       "--border-brand",
       "--border-hairline",
+      "--border-input",
       "--border-strong",
       "--border-subtle",
       "--clay-100",
       "--clay-500",
+      "--control-h",
       "--dur-base",
       "--dur-fast",
       "--dur-instant",
@@ -102,9 +104,10 @@
       "--fg-brand",
       "--fg-brand-strong",
       "--fg-inverse",
+      "--font-body",
+      "--font-heading",
       "--font-mono",
       "--font-sans",
-      "--font-serif",
       "--glass-blur",
       "--glass-bone",
       "--glass-plum",
@@ -139,8 +142,10 @@
       "--radius-xl",
       "--radius-xs",
       "--ring-focus",
+      "--safe-bottom",
       "--sage-100",
       "--sage-500",
+      "--scrim",
       "--shadow-inset",
       "--shadow-lg",
       "--shadow-md",
@@ -162,6 +167,8 @@
       "--space-5",
       "--space-6",
       "--space-8",
+      "--tabbar-h",
+      "--target-min",
       "--text-body",
       "--text-body-l",
       "--text-body-s",
@@ -178,7 +185,8 @@
       "--tracking-body",
       "--tracking-caps",
       "--tracking-display",
-      "--tracking-heading"
+      "--tracking-heading",
+      "--weight-button"
     ],
     "tokenKinds": {
       "--plum-50": "color",
@@ -233,7 +241,8 @@
       "--glass-bone": "color",
       "--glass-plum": "color",
       "--glass-blur": "spacing",
-      "--font-serif": "font",
+      "--font-heading": "font",
+      "--font-body": "font",
       "--font-sans": "font",
       "--font-mono": "font",
       "--text-display-xl": "font",
@@ -282,6 +291,13 @@
       "--shadow-lg": "shadow",
       "--shadow-xl": "shadow",
       "--shadow-inset": "shadow",
+      "--control-h": "spacing",
+      "--target-min": "spacing",
+      "--safe-bottom": "spacing",
+      "--tabbar-h": "spacing",
+      "--scrim": "color",
+      "--border-input": "color",
+      "--weight-button": "font",
       "--ring-focus": "shadow",
       "--ease-out": "other",
       "--ease-in-out": "other",
@@ -293,9 +309,9 @@
       "--dur-slower": "other"
     },
     "fontFamilies": [
-      "Faustina",
       "IBM Plex Sans",
-      "JetBrains Mono"
+      "Inter",
+      "IBM Plex Mono"
     ]
   }
 }

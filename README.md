@@ -22,7 +22,7 @@ A consumer health platform. Patients (we call them **members**) own their record
 |------|---------|
 | Visual density | Calm → generous whitespace, one thing at a time |
 | Color | Deep plum primary, warm bone canvas, muted semantic accents |
-| Type | Humanist serif (Faustina) for moments; humanist sans (IBM Plex) for UI; monospace for numbers |
+| Type | IBM Plex Sans headings; Inter body and UI; IBM Plex Mono metrics |
 | Motion | Short springy ease-outs, never bouncy-cartoonish |
 | Tone | Direct, plainspoken, second-person, no medical jargon without translation |
 | Iconography | Hairline strokes, 1.5px, rounded joins (Lucide) |
@@ -103,10 +103,11 @@ All subsequent iteration should treat this README + `colors_and_type.css` as the
 - **Glass**: translucent bone/white panels with 20px backdrop blur over warm gradient backgrounds. Used sparingly — the hero of at most one surface per screen.
 
 ### Type
-- Display: **Faustina** at 29–72px for editorial moments (hero, empty state, milestones, section dividers). Weight 500 at display sizes, tracked –2%. Italic used for quiet emphasis.
-- UI/body: **IBM Plex Sans** at 13–22px. 400/500/600/700 weights. Default to 15/1.55 for body. Humanist and institutionally credible — pairs with Faustina by shared skeleton, not by contrast.
-- Mono: **JetBrains Mono** for all numbers in data contexts, with `tabular-nums` on. Never for body copy.
-- **Rule**: serif appears once or twice per screen max. It's the moment, not the substrate.
+- Headings and display: **IBM Plex Sans**, weight 500 for display, 600 for UI headings. Display leading 1.15; heading leading 1.25.
+- UI/body: **Inter**, 400/500/600/700. Default body 15px / 1.55.
+- Eyebrows: **IBM Plex Sans**, 11px, uppercase, tracked +8%.
+- Metrics: **IBM Plex Mono**, tabular numerals. Phone numbers used as identity stay in the body face.
+- Use `--font-heading`, `--font-body`, and `--font-mono` by role. No serif face is used.
 
 ### Spacing
 4px baseline grid. The system leans toward generous spacing — an 80px section gap feels right, a 24px card gap feels right. Density is earned, not default.
@@ -134,7 +135,7 @@ All subsequent iteration should treat this README + `colors_and_type.css` as the
 
 ### Borders
 - Default: `1px solid rgba(26, 24, 20, 0.08)` — a hairline, almost invisible. Does the work of separation without adding weight.
-- Inputs: `1px solid rgba(26, 24, 20, 0.12)` on rest; plum `rgba(90,63,122,0.4)` + 3px ring on focus.
+- Inputs: `1px solid var(--border-input)` at rest; brand plum border and 3px plum ring on focus.
 - **Never** a colored left-border accent on cards. That pattern is banned.
 
 ### Shadows
@@ -148,7 +149,7 @@ Two systems:
 - Exception: on the rare dark plum hero (onboarding, marketing hero), a bone-to-transparent gradient at the bottom protects CTA legibility.
 
 ### Layout rules
-- **Fixed elements**: top nav bar (64px desktop, 56px mobile), bottom tab bar on mobile (72px incl. safe area). No fixed side panels in consumer app; side nav is a 260px flex column on web.
+- **Fixed elements**: top nav bar (64px desktop, 56px mobile), bottom tab bar on mobile (48px controls plus the device’s bottom safe area). No fixed side panels in consumer app; side nav is a 260px flex column on web.
 - **Content max-width**: 720px for reading, 1200px for dashboards.
 - **Vertical rhythm**: major sections separated by `--space-20` (80px) on web, `--space-12` (48px) on mobile.
 
@@ -163,7 +164,7 @@ Used for **one** purpose: floating controls over content (e.g. an iOS-style tab 
 - **Never** fully rounded except for pills/avatars — fully rounded reads as Instagram-y.
 
 ### Cards
-A card is: **white surface**, `--shadow-sm`, `--radius-lg` (16px), **hairline border** (`rgba(26,24,20,0.08)`), `24px` internal padding by default. No gradients, no colored borders, no accent strips. A card can contain a monospace metric, a serif heading, sans-serif body, and nothing else chrome-wise.
+A card is: **white surface**, `--shadow-sm`, `--radius-lg` (16px), **hairline border** (`rgba(26,24,20,0.08)`), `24px` internal padding by default. No gradients, no colored borders, no accent strips. A card can contain a monospace metric, a Plex Sans heading, sans-serif body, and nothing else chrome-wise.
 
 ### Imagery color
 Warm, desaturated, documentary. Light grain is fine. No teal-orange blockbuster grading. No clinical stock photos.
@@ -198,14 +199,18 @@ We use **[Lucide](https://lucide.dev)** — the MIT-licensed fork of Feather. Lo
 ├── README.md                   ← this file
 ├── SKILL.md                    ← Agent Skill manifest (Claude Code compatible)
 ├── colors_and_type.css         ← all design tokens
+├── controls.css                ← shared buttons, inputs, focus, reduced motion
+├── addon.css                   ← onboarding reference layouts
+├── scripts/                    ← preview build and publication checks
 ├── assets/
 │   ├── logo-mark.png / .svg          ← arch mark (plum on bone)
 │   ├── logo-mark-inverse.png / .svg  ← bone on plum, for dark surfaces
 │   └── logo-wordmark.svg             ← mark + "Antaeus Health"
-├── fonts/README.md             ← font stack + substitution notes
+├── fonts/README.md             ← font roles
 ├── preview/                    ← Design System tab cards
 │   └── [17 specimen cards]
 └── ui_kits/
+    ├── onboarding/             ← eight static reference screens
     └── consumer_app/           ← iOS consumer app (React, interactive)
         ├── README.md
         ├── index.html          ← tabbed prototype
@@ -217,7 +222,7 @@ We use **[Lucide](https://lucide.dev)** — the MIT-licensed fork of Feather. Lo
 
 ## Caveats & next steps
 
-**🚩 Type stack is free but deliberate.** Faustina / IBM Plex Sans / JetBrains Mono were each chosen on merit, not as placeholders — Plex in particular carries the institutional credibility the brand needs. Faustina stands in for *Tiempos Text* and JetBrains Mono for *Söhne Mono* if those get licensed; Plex should probably stay.
+**Type stack:** IBM Plex Sans, Inter, and IBM Plex Mono are freely available through Google Fonts. See `fonts/README.md`.
 
 **🚩 Logo is a user-supplied mark.** The open arch PNG/SVG pair came from the founder; the SVGs were redrawn to match the raster.
 
@@ -226,3 +231,37 @@ We use **[Lucide](https://lucide.dev)** — the MIT-licensed fork of Feather. Lo
 **🚩 No photography direction executed.** The guide specifies warm documentary b&w, but no reference imagery is in `assets/`.
 
 **🚩 Icons are hand-rolled SVG matching Lucide.** In production, pull from the Lucide CDN directly.
+
+## Controls, onboarding, and accessibility
+
+Adopted from [Devin’s design addon](https://github.com/devin-griser/antaeus-design-addon/tree/eed0918), with typography and control decisions resolved on September 24, 2026.
+
+- One primary action per screen: flat plum-500, bone label; hover plum-600. Secondary is outlined with brand text; tertiary is a text action. Disabled controls use sunken bone and `--fg-3`. `ghost` remains an alias for outlined secondary.
+- Default buttons, fields, and back controls are 48px high. Compact controls retain at least 44px by 44px hit areas. Back controls are rounded squares.
+- Heading `--fg-1`, helper `--fg-2`, metadata and placeholders `--fg-3`. Running text must reach 4.5:1 contrast; input boundaries reach 3:1. Hairline borders remain for cards.
+- Every control has visible keyboard focus. Respect reduced motion, underline links within running text, and expose selected states programmatically. ARIA roles alone do not supply keyboard interaction.
+- Menus and sheets use `--scrim`, warm ink at 24% opacity. The tab bar uses glass bone, with 48px controls plus the actual safe area.
+
+Onboarding rhythm:
+
+| From → to | Gap |
+|---|---|
+| Page edge → content | 24px |
+| Control row → eyebrow | 32px |
+| Eyebrow → heading | 12px |
+| Heading → helper | 16px |
+| Helper → first field | 32px |
+| Field → field or button | 16px |
+| Button → tertiary links | 24px |
+
+Reserve the 48px control row plus 8px top padding even when no back button appears. Form headings use 29px; welcome headings use 38px.
+
+### Using the files
+
+Load `styles.css` for tokens and shared controls. Load `addon.css` after it only for onboarding reference layouts. `ui_kits/onboarding/` contains eight static reference screens; `ui_kits/consumer_app/` is the interactive measurement prototype. Run `npm run build` to regenerate bundles and the publication directory.
+
+The onboarding references demonstrate design, not a working signup flow. Invite-code placement, welcome copy, and empty-timeline guidance remain product questions. Error, loading, and keyboard-up states require product implementation and review.
+
+### Migration
+
+Replace `--font-serif` with `--font-heading`, `.serif-italic` with `.heading-emphasis`, and `.serif-moment` with `.heading-moment`. The removed serif family has no compatibility token. `--font-sans` remains an alias for the new body face; `--fg-4` aliases readable `--fg-3`. React `Button` consumers must load `styles.css`; its existing props remain supported, with an added `tertiary` variant.

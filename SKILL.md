@@ -18,7 +18,7 @@ Antaeus Health is a **consumer-facing health platform** — serious, restrained,
 - Warm bone canvas (`#FBF9F6`), never pure white
 - Deep plum primary (`#5A3F7A`) — used sparingly, earned
 - Muted semantic accents: sage (ok), amber (attention), clay (alert), sky (info)
-- Type: Faustina (display), IBM Plex Sans (UI), JetBrains Mono (metrics)
+- Type: IBM Plex Sans (headings and eyebrows), Inter (body and UI), IBM Plex Mono (metrics)
 - Hairline borders, soft warm-tinted shadows, generous whitespace
 - Lucide icons at 1.5px stroke
 
@@ -33,7 +33,15 @@ Antaeus Health is a **consumer-facing health platform** — serious, restrained,
 ## Rules (non-negotiable)
 1. Never use emoji in product chrome
 2. Never use colored left-border accents on cards
-3. Never use pure white backgrounds — always bone
+3. Page backgrounds are bone; cards and fields may use white surfaces
 4. Never use bluish-purple gradients or "AI slop" motifs
 5. Always tabular-nums for data, mono font for metrics
 6. Sentence case on all headings and buttons
+
+7. Use role tokens: `--font-heading`, `--font-body`, `--font-mono`. No serif fonts.
+8. One flat plum primary action per screen; outlined secondary; text tertiary. Default controls are 48px, compact tap targets at least 44px in both dimensions.
+9. Text hierarchy is `--fg-1`, `--fg-2`, `--fg-3`; inputs use `--border-input`. Verify contrast, keyboard focus, and reduced motion.
+10. Follow the onboarding rhythm table in README.md. Keep the control row present so headings align between steps.
+11. Tab controls are 48px plus device safe area. Menus and sheets use `--scrim`.
+
+Use `styles.css` for shared controls and tokens. Use `addon.css` for onboarding layouts and `ui_kits/onboarding/` for reference screens. These screens are static mocks, not production interaction implementations.

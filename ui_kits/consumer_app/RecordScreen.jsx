@@ -13,9 +13,9 @@ function RecordScreen({ onAdd }) {
     <div className="app-scroll" style={{ paddingBottom: 140 }}>
       <ScreenHeader eyebrow="Your record" title="What we're tracking" />
 
-      <div style={{ display: 'flex', alignItems: 'center', background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 12px', marginBottom: 14, gap: 8 }}>
+      <div className="field-control" style={{ display: 'flex', alignItems: 'center', background: '#fff', border: '1px solid var(--border-input)', borderRadius: 12, padding: '10px 12px', marginBottom: 14, gap: 8 }}>
         <Icon name="search" size={15} color="var(--fg-3)"/>
-        <input placeholder="Search measurements, labs, medications…" style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14, background: 'transparent' }}/>
+        <input aria-label="Search measurements" placeholder="Search measurements, labs, medications…" style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14, background: 'transparent' }}/>
       </div>
 
       <Card style={{ padding: 0, marginBottom: 14 }}>
@@ -40,12 +40,7 @@ function RecordScreen({ onAdd }) {
         ))}
       </Card>
 
-      <button onClick={onAdd} style={{
-        width: '100%', background: 'var(--plum-500)', color: '#fff', border: 'none',
-        borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        cursor: 'pointer', boxShadow: 'var(--shadow-sm)',
-      }}>
+      <button className="btn btn-primary" onClick={onAdd} style={{ width: '100%' }}>
         <Icon name="plus" size={18} stroke={2} color="#fff"/> Add measurement
       </button>
     </div>
@@ -58,7 +53,7 @@ function AddMeasurementSheet({ onClose, onSave }) {
   return (
     <div style={{
       position: 'absolute', inset: 0, zIndex: 60,
-      background: 'rgba(21, 16, 28, 0.38)', backdropFilter: 'blur(4px)',
+      background: 'var(--scrim)',
       display: 'flex', alignItems: 'flex-end',
     }} onClick={onClose}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -69,10 +64,10 @@ function AddMeasurementSheet({ onClose, onSave }) {
       }}>
         <div style={{ width: 38, height: 4, background: 'var(--ink-300)', borderRadius: 2, margin: '8px auto 18px' }}/>
         <div className="eyebrow-sm">New reading</div>
-        <div className="serif-moment" style={{ fontSize: 26, marginTop: 6 }}>Fasting glucose</div>
+        <div className="heading-moment" style={{ fontSize: 26, marginTop: 6 }}>Fasting glucose</div>
 
-        <div style={{ marginTop: 20, background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '18px 16px', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-          <input value={value} onChange={e => setValue(e.target.value)} style={{
+        <div className="field-control" style={{ marginTop: 20, background: '#fff', border: '1px solid var(--border-input)', borderRadius: 12, padding: '18px 16px', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+          <input aria-label="Fasting glucose" value={value} onChange={e => setValue(e.target.value)} style={{
             border: 'none', outline: 'none', fontFamily: 'var(--font-mono)',
             fontSize: 40, fontWeight: 500, color: 'var(--fg-1)', width: 140,
             background: 'transparent', fontVariantNumeric: 'tabular-nums',
@@ -81,15 +76,15 @@ function AddMeasurementSheet({ onClose, onSave }) {
         </div>
 
         <div style={{ fontSize: 12, color: 'var(--fg-2)', marginTop: 10, lineHeight: 1.5 }}>
-          {Number(value) > 125 ? <><span style={{ color: 'var(--amber-500)', fontWeight: 600 }}>Above your target.</span> We'll flag this for Dr. Patel.</> : <>Within your target range of 80–120.</>}
+          {Number(value) > 125 ? <><span style={{ color: 'var(--fg-2)', fontWeight: 600 }}>Above your target.</span> We'll flag this for Dr. Patel.</> : <>Within your target range of 80–120.</>}
         </div>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
-          <button onClick={onClose} style={{ flex: 1, background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500, color: 'var(--fg-1)', cursor: 'pointer' }}>Cancel</button>
-          <button onClick={() => onSave(value)} style={{ flex: 2, background: 'var(--plum-500)', border: 'none', borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500, color: '#fff', cursor: 'pointer' }}>Save reading</button>
+          <button className="btn btn-secondary" onClick={onClose} style={{ flex: 1 }}>Cancel</button>
+          <button className="btn btn-primary" onClick={() => onSave(value)} style={{ flex: 2 }}>Save reading</button>
         </div>
       </div>
-      <style>{`@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
+      <style>{`@keyframes slideUp { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
     </div>
   );
 }

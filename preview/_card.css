@@ -1,14 +1,14 @@
 /* Shared card shell for Design System preview cards.
    Cards target ~700×<auto> and are rendered small, so specimens should be
    big enough to read. */
-@import url('../colors_and_type.css');
+@import url('../styles.css');
 
 html, body {
   margin: 0;
   padding: 0;
   background: var(--bg-page);
   color: var(--fg-1);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
@@ -67,5 +67,5 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--fg-3);
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
 }

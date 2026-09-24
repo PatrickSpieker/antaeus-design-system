@@ -31,7 +31,7 @@ function TodayScreen() {
           <Chip tone="sage">Within range</Chip>
         </div>
         <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid var(--border-hairline)', fontSize: 13, color: 'var(--fg-2)', lineHeight: 1.5 }}>
-          Five readings this week. <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--plum-600)' }}>Trending down</span> from last month's 124/80.
+          Five readings this week. <span style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--plum-600)' }}>Trending down</span> from last month's 124/80.
         </div>
       </Card>
 
@@ -62,7 +62,7 @@ function TodayScreen() {
             <div style={{ fontSize: 15, fontWeight: 600 }}>Dr. Priya Patel</div>
             <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>Endocrinology · Thursday, 2:30 PM</div>
           </div>
-          <Icon name="chevronR" size={16} color="var(--fg-4)"/>
+          <Icon name="chevronR" size={16} color="var(--fg-3)"/>
         </div>
         <div style={{ borderTop: '1px solid var(--border-hairline)', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10, background: 'var(--bone-50)' }}>
           <div style={{ width: 6, height: 6, borderRadius: 3, background: 'var(--amber-500)' }}/>
@@ -73,10 +73,10 @@ function TodayScreen() {
       {/* This week — editorial moment */}
       <div style={{ marginTop: 22, padding: '22px 18px', borderRadius: 16, background: 'linear-gradient(145deg, var(--plum-100) 0%, var(--bone-100) 100%)', border: '1px solid var(--border-hairline)' }}>
         <div className="eyebrow-sm" style={{ color: 'var(--plum-700)' }}>This week</div>
-        <div className="serif-moment" style={{ fontSize: 26, marginTop: 10, lineHeight: 1.15 }}>
+        <div className="heading-moment" style={{ fontSize: 26, marginTop: 10, lineHeight: 1.15 }}>
           Three fasting readings above your target. <span style={{ fontStyle: 'italic' }}>Worth mentioning to Dr. Patel.</span>
         </div>
-        <button style={{ marginTop: 14, background: 'var(--plum-500)', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>Add to visit prep</button>
+        <button className="btn btn-primary" style={{ marginTop: 14 }}>Add to visit prep</button>
       </div>
     </div>
   );

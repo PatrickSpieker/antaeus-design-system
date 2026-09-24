@@ -1,5 +1,4 @@
-
-// ===== ios-frame.jsx =====
+// ios-frame.jsx
 
 // iOS.jsx — Simplified iOS 26 (Liquid Glass) device frame
 // Based on the iOS 26 UI Kit + Figma status bar spec. No assets, no deps.
@@ -339,8 +338,7 @@ Object.assign(window, {
   IOSDevice, IOSStatusBar, IOSNavBar, IOSGlassPill, IOSList, IOSListRow, IOSKeyboard,
 });
 
-
-// ===== Shared.jsx =====
+// Shared.jsx
 // Small shared pieces used across screens.
 
 function Icon({ name, size = 20, stroke = 1.5, color = 'currentColor' }) {
@@ -394,37 +392,14 @@ function TabBar({ active = 'home', onChange = () => {} }) {
     { id: 'me',   label: 'You',   icon: 'user' },
   ];
   return (
-    <div style={{
-      position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 40,
-      paddingBottom: 34, paddingTop: 10, paddingLeft: 14, paddingRight: 14,
-      background: 'linear-gradient(to top, rgba(251,249,246,0.98) 40%, rgba(251,249,246,0))',
-      pointerEvents: 'none',
-    }}>
-      <div style={{
-        background: 'rgba(255,255,255,0.82)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        border: '1px solid rgba(26,24,20,0.06)',
-        borderRadius: 22,
-        boxShadow: '0 8px 24px rgba(26,24,20,0.08), 0 2px 6px rgba(26,24,20,0.05)',
-        display: 'flex', padding: 6, pointerEvents: 'auto',
-      }}>
-        {items.map(it => {
-          const isActive = it.id === active;
-          return (
-            <button key={it.id} onClick={() => onChange(it.id)} style={{
-              flex: 1, background: 'none', border: 'none', cursor: 'pointer',
-              padding: '8px 4px', display: 'flex', flexDirection: 'column',
-              alignItems: 'center', gap: 3,
-              color: isActive ? 'var(--plum-500)' : 'var(--fg-3)',
-            }}>
-              <Icon name={it.icon} size={22} stroke={isActive ? 2 : 1.6} />
-              <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: 0.02 }}>{it.label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <nav className="app-tabbar" aria-label="Main navigation">
+      {items.map(it => (
+        <button key={it.id} type="button" aria-current={it.id === active ? 'page' : undefined} onClick={() => onChange(it.id)}>
+          <Icon name={it.icon} size={22} stroke={1.5} />
+          <span style={{ fontSize: 11, fontWeight: 600 }}>{it.label}</span>
+        </button>
+      ))}
+    </nav>
   );
 }
 
@@ -432,7 +407,7 @@ function ScreenHeader({ eyebrow, title, subtitle }) {
   return (
     <div style={{ padding: '18px 4px 12px' }}>
       {eyebrow && <div className="eyebrow-sm" style={{ marginBottom: 10 }}>{eyebrow}</div>}
-      <div className="serif-moment" style={{ fontSize: 34 }}>{title}</div>
+      <div className="heading-moment" style={{ fontSize: 34 }}>{title}</div>
       {subtitle && <div style={{ fontSize: 14, color: 'var(--fg-2)', marginTop: 10, lineHeight: 1.5 }}>{subtitle}</div>}
     </div>
   );
@@ -440,8 +415,7 @@ function ScreenHeader({ eyebrow, title, subtitle }) {
 
 Object.assign(window, { Icon, Chip, Card, TabBar, ScreenHeader });
 
-
-// ===== TodayScreen.jsx =====
+// TodayScreen.jsx
 // Today / home screen — the daily driver.
 
 function TodayScreen() {
@@ -475,7 +449,7 @@ function TodayScreen() {
           <Chip tone="sage">Within range</Chip>
         </div>
         <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid var(--border-hairline)', fontSize: 13, color: 'var(--fg-2)', lineHeight: 1.5 }}>
-          Five readings this week. <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--plum-600)' }}>Trending down</span> from last month's 124/80.
+          Five readings this week. <span style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--plum-600)' }}>Trending down</span> from last month's 124/80.
         </div>
       </Card>
 
@@ -506,7 +480,7 @@ function TodayScreen() {
             <div style={{ fontSize: 15, fontWeight: 600 }}>Dr. Priya Patel</div>
             <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>Endocrinology · Thursday, 2:30 PM</div>
           </div>
-          <Icon name="chevronR" size={16} color="var(--fg-4)"/>
+          <Icon name="chevronR" size={16} color="var(--fg-3)"/>
         </div>
         <div style={{ borderTop: '1px solid var(--border-hairline)', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10, background: 'var(--bone-50)' }}>
           <div style={{ width: 6, height: 6, borderRadius: 3, background: 'var(--amber-500)' }}/>
@@ -517,10 +491,10 @@ function TodayScreen() {
       {/* This week — editorial moment */}
       <div style={{ marginTop: 22, padding: '22px 18px', borderRadius: 16, background: 'linear-gradient(145deg, var(--plum-100) 0%, var(--bone-100) 100%)', border: '1px solid var(--border-hairline)' }}>
         <div className="eyebrow-sm" style={{ color: 'var(--plum-700)' }}>This week</div>
-        <div className="serif-moment" style={{ fontSize: 26, marginTop: 10, lineHeight: 1.15 }}>
+        <div className="heading-moment" style={{ fontSize: 26, marginTop: 10, lineHeight: 1.15 }}>
           Three fasting readings above your target. <span style={{ fontStyle: 'italic' }}>Worth mentioning to Dr. Patel.</span>
         </div>
-        <button style={{ marginTop: 14, background: 'var(--plum-500)', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>Add to visit prep</button>
+        <button className="btn btn-primary" style={{ marginTop: 14 }}>Add to visit prep</button>
       </div>
     </div>
   );
@@ -528,8 +502,7 @@ function TodayScreen() {
 
 Object.assign(window, { TodayScreen });
 
-
-// ===== RecordScreen.jsx =====
+// RecordScreen.jsx
 // Record screen — list of tracked measurements with add/log entry.
 
 function RecordScreen({ onAdd }) {
@@ -545,9 +518,9 @@ function RecordScreen({ onAdd }) {
     <div className="app-scroll" style={{ paddingBottom: 140 }}>
       <ScreenHeader eyebrow="Your record" title="What we're tracking" />
 
-      <div style={{ display: 'flex', alignItems: 'center', background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 12px', marginBottom: 14, gap: 8 }}>
+      <div className="field-control" style={{ display: 'flex', alignItems: 'center', background: '#fff', border: '1px solid var(--border-input)', borderRadius: 12, padding: '10px 12px', marginBottom: 14, gap: 8 }}>
         <Icon name="search" size={15} color="var(--fg-3)"/>
-        <input placeholder="Search measurements, labs, medications…" style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14, background: 'transparent' }}/>
+        <input aria-label="Search measurements" placeholder="Search measurements, labs, medications…" style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14, background: 'transparent' }}/>
       </div>
 
       <Card style={{ padding: 0, marginBottom: 14 }}>
@@ -572,12 +545,7 @@ function RecordScreen({ onAdd }) {
         ))}
       </Card>
 
-      <button onClick={onAdd} style={{
-        width: '100%', background: 'var(--plum-500)', color: '#fff', border: 'none',
-        borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        cursor: 'pointer', boxShadow: 'var(--shadow-sm)',
-      }}>
+      <button className="btn btn-primary" onClick={onAdd} style={{ width: '100%' }}>
         <Icon name="plus" size={18} stroke={2} color="#fff"/> Add measurement
       </button>
     </div>
@@ -590,7 +558,7 @@ function AddMeasurementSheet({ onClose, onSave }) {
   return (
     <div style={{
       position: 'absolute', inset: 0, zIndex: 60,
-      background: 'rgba(21, 16, 28, 0.38)', backdropFilter: 'blur(4px)',
+      background: 'var(--scrim)',
       display: 'flex', alignItems: 'flex-end',
     }} onClick={onClose}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -601,10 +569,10 @@ function AddMeasurementSheet({ onClose, onSave }) {
       }}>
         <div style={{ width: 38, height: 4, background: 'var(--ink-300)', borderRadius: 2, margin: '8px auto 18px' }}/>
         <div className="eyebrow-sm">New reading</div>
-        <div className="serif-moment" style={{ fontSize: 26, marginTop: 6 }}>Fasting glucose</div>
+        <div className="heading-moment" style={{ fontSize: 26, marginTop: 6 }}>Fasting glucose</div>
 
-        <div style={{ marginTop: 20, background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '18px 16px', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-          <input value={value} onChange={e => setValue(e.target.value)} style={{
+        <div className="field-control" style={{ marginTop: 20, background: '#fff', border: '1px solid var(--border-input)', borderRadius: 12, padding: '18px 16px', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+          <input aria-label="Fasting glucose" value={value} onChange={e => setValue(e.target.value)} style={{
             border: 'none', outline: 'none', fontFamily: 'var(--font-mono)',
             fontSize: 40, fontWeight: 500, color: 'var(--fg-1)', width: 140,
             background: 'transparent', fontVariantNumeric: 'tabular-nums',
@@ -613,23 +581,22 @@ function AddMeasurementSheet({ onClose, onSave }) {
         </div>
 
         <div style={{ fontSize: 12, color: 'var(--fg-2)', marginTop: 10, lineHeight: 1.5 }}>
-          {Number(value) > 125 ? <><span style={{ color: 'var(--amber-500)', fontWeight: 600 }}>Above your target.</span> We'll flag this for Dr. Patel.</> : <>Within your target range of 80–120.</>}
+          {Number(value) > 125 ? <><span style={{ color: 'var(--fg-2)', fontWeight: 600 }}>Above your target.</span> We'll flag this for Dr. Patel.</> : <>Within your target range of 80–120.</>}
         </div>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
-          <button onClick={onClose} style={{ flex: 1, background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500, color: 'var(--fg-1)', cursor: 'pointer' }}>Cancel</button>
-          <button onClick={() => onSave(value)} style={{ flex: 2, background: 'var(--plum-500)', border: 'none', borderRadius: 12, padding: '14px', fontSize: 15, fontWeight: 500, color: '#fff', cursor: 'pointer' }}>Save reading</button>
+          <button className="btn btn-secondary" onClick={onClose} style={{ flex: 1 }}>Cancel</button>
+          <button className="btn btn-primary" onClick={() => onSave(value)} style={{ flex: 2 }}>Save reading</button>
         </div>
       </div>
-      <style>{`@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
+      <style>{`@keyframes slideUp { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
     </div>
   );
 }
 
 Object.assign(window, { RecordScreen, AddMeasurementSheet });
 
-
-// ===== CareScreen.jsx =====
+// CareScreen.jsx
 // Care team + messages.
 
 function CareScreen() {
@@ -649,7 +616,7 @@ function CareScreen() {
       <Card style={{ padding: 0, marginBottom: 18 }}>
         {team.map((p, i) => (
           <div key={p.name} style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 14, borderTop: i === 0 ? 'none' : '1px solid var(--border-hairline)' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 22, background: 'var(--plum-100)', color: 'var(--plum-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: 18 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 22, background: 'var(--plum-100)', color: 'var(--plum-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)', fontSize: 18 }}>
               {p.initials}
             </div>
             <div style={{ flex: 1 }}>
@@ -698,14 +665,13 @@ function YouScreen() {
               <Icon name={r.icon} size={16}/>
             </div>
             <div style={{ flex: 1, fontSize: 14 }}>{r.label}</div>
-            <Icon name="chevronR" size={16} color="var(--fg-4)"/>
+            <Icon name="chevronR" size={16} color="var(--fg-3)"/>
           </div>
         ))}
       </Card>
-      <button style={{ width: '100%', background: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '14px', fontSize: 14, fontWeight: 500, color: 'var(--clay-500)', cursor: 'pointer' }}>Sign out</button>
+      <button className="btn btn-secondary" style={{ width: '100%' }}>Sign out</button>
     </div>
   );
 }
 
 Object.assign(window, { CareScreen, YouScreen });
-

@@ -1,0 +1,49 @@
+/* Shared controls. Load through styles.css or after colors_and_type.css. */
+.btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-h);
+  min-width: var(--target-min);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-button);
+  line-height: var(--leading-tight);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-instant) var(--ease-out);
+}
+.btn-primary { background: var(--plum-500); color: var(--fg-inverse); }
+.btn-primary:hover:not(:disabled) { background: var(--plum-600); }
+.btn-secondary, .btn-ghost { background: transparent; border-color: var(--border-hairline); color: var(--fg-brand); }
+.btn-secondary:hover:not(:disabled), .btn-ghost:hover:not(:disabled) { background: var(--bg-surface-2); }
+.btn-tertiary { background: transparent; color: var(--fg-brand); }
+.btn-tertiary:hover:not(:disabled) { text-decoration: underline; }
+.btn-destructive { background: #8F3A2E; color: var(--fg-inverse); }
+.btn-destructive:hover:not(:disabled) { background: #6B2A21; }
+.btn:active:not(:disabled) { transform: scale(0.98); }
+.btn-sm { min-height: var(--target-min); font-size: var(--text-body-s); border-radius: var(--radius-sm); padding: var(--space-2) var(--space-3); }
+.btn-lg { padding-inline: var(--space-6); }
+.btn:disabled { background: var(--bg-sunken); color: var(--fg-3); border-color: transparent; cursor: not-allowed; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--plum-500);
+  outline-offset: 3px;
+}
+input, select, textarea { font-family: var(--font-body); }
+input::placeholder, textarea::placeholder { color: var(--fg-3); opacity: 1; }
+.field-control {
+  box-sizing: border-box;
+  min-height: var(--control-h);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-inset);
+}
+.field-control:focus-within { border-color: var(--border-brand); box-shadow: var(--ring-focus); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

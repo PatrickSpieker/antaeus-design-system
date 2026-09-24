@@ -1,7 +1,7 @@
 /* Consumer App — warm bone canvas for iOS frame */
-@import url('../../colors_and_type.css');
+@import url('../../styles.css');
 
-html, body { margin: 0; background: var(--bone-100); font-family: var(--font-sans); color: var(--fg-1); -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; background: var(--bone-100); font-family: var(--font-body); color: var(--fg-1); -webkit-font-smoothing: antialiased; }
 
 .app-screen {
   width: 100%;
@@ -9,7 +9,7 @@ html, body { margin: 0; background: var(--bone-100); font-family: var(--font-san
   background: var(--bone-50);
   display: flex;
   flex-direction: column;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   color: var(--fg-1);
   overflow: hidden;
 }
@@ -21,6 +21,7 @@ html, body { margin: 0; background: var(--bone-100); font-family: var(--font-san
 }
 
 .eyebrow-sm {
+  font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -36,12 +37,12 @@ html, body { margin: 0; background: var(--bone-100); font-family: var(--font-san
   color: var(--fg-1);
 }
 
-.serif-moment {
-  font-family: var(--font-serif);
+.heading-moment {
+  font-family: var(--font-heading);
   font-weight: 500;
   color: var(--fg-1);
   letter-spacing: -0.01em;
-  line-height: 1.08;
+  line-height: var(--leading-display);
 }
 
 .card-soft {
@@ -71,3 +72,9 @@ html, body { margin: 0; background: var(--bone-100); font-family: var(--font-san
 .chip.plum { background: var(--plum-100); color: var(--plum-700); }
 
 button { font-family: inherit; }
+
+.app-screen { --safe-bottom: 34px; --tabbar-h: calc(var(--control-h) + var(--safe-bottom)); }
+.app-screen button:not(.btn) { min-height: var(--target-min); min-width: var(--target-min); }
+.app-tabbar { position: absolute; bottom: 0; left: 0; right: 0; z-index: 40; display: flex; box-sizing: border-box; height: var(--tabbar-h); padding: 0 var(--space-4) var(--safe-bottom); background: var(--glass-bone); backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--border-hairline); }
+.app-tabbar button { flex: 1; height: var(--control-h); border: 0; background: transparent; color: var(--fg-3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; }
+.app-tabbar button[aria-current="page"] { color: var(--fg-brand); background: var(--plum-100); border-radius: var(--radius-pill); }
