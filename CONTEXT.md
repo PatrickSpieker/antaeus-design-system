@@ -26,7 +26,7 @@ The published entry point is `/index.md`, with `/tokens.json`, `/guidance/…`, 
 
 ## Design decisions
 
-- Default surfaces and cards use bone (`#FBF9F6`), matching the page background; borders and shadows provide separation. Replace the white surface token and white-card guidance.
+- Default cards use bone-50 (`#FBF9F6`) against a bone-200 (`#EAE4DA`) page. Card outlines use opaque ink-600, and essential metadata uses ink-700. This supersedes the same-color page/card decision after the October 25, 2026 readability review.
 - Hover transitions take 140ms; press feedback takes 80ms.
 - Inner shadows are allowed persistently for sunken inputs and temporarily for pressed cards.
 - Entrances and exits must not zoom; buttons may scale to 0.98 for press feedback.

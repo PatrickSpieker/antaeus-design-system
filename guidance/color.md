@@ -13,7 +13,7 @@ Use semantic tokens such as `bg-page`, `bg-surface`, `fg-1`, and `fg-brand` when
 
 ## Surfaces and cards
 
-Both the page and default cards use bone (`#FBF9F6`); no opaque pure-white backgrounds. Cards use `shadow-sm`, `radius-lg`, `border-hairline`, and `space-6` padding. Borders and shadows provide separation. Use `bg-surface-2` and `bg-sunken` for secondary and recessed surfaces.
+Pages use `bg-page` (bone-200, `#EAE4DA`); cards use `bg-surface` (bone-50, `#FBF9F6`). Cards use a one-unit `border-card` (opaque ink-600), `shadow-sm`, `radius-lg`, and `space-6` padding. The outline must remain visible without a shadow. No opaque pure-white backgrounds. Use `bg-surface-2` and `bg-sunken` for secondary and recessed surfaces.
 
 Cards have no gradients, colored borders, or colored accent strips. Plum should not form large flat fills on ordinary product screens. A restrained dark plum hero is an explicit exception for onboarding and marketing; use inverse foreground colors there.
 
@@ -32,3 +32,9 @@ Inner shadows are allowed persistently for sunken inputs and temporarily for car
 ## Menu and sheet overlays
 
 Use `scrim`, warm ink at 24% opacity, behind menus and sheets. It keeps the underlying screen recognizable. Do not use the opaque-looking bone glass surface as an overlay scrim. Surface and glass rules above still apply to the panel itself.
+
+## Readable card content
+
+Use `fg-1` for titles and `fg-2`/`fg-3` for supporting text. Metadata is essential content: `fg-3` now uses ink-700, with at least 7:1 contrast on supported opaque surfaces. Establish hierarchy through size, weight and spacing rather than faded text or added opacity.
+
+Use `border-card` for both static cards and interactive category/summary cards. It must reach at least 3:1 against the page and card surfaces. Hairlines remain appropriate only for decorative interior separators; they are not card boundaries. Shadows supplement the outline and never replace it. Native system-owned controls retain their platform rendering.

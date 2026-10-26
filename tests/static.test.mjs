@@ -12,7 +12,8 @@ test('agreed palette, font and interaction values survive the migration', () => 
   const resolved = resolveTokens(document);
   const value = name => resolved.get(name).value;
   assert.deepEqual(value('bg-surface'), { hex: '#FBF9F6', alpha: 1 });
-  assert.deepEqual(value('bg-page'), value('bg-surface'));
+  assert.deepEqual(value('bg-page'), value('bone-200'));
+  assert.notDeepEqual(value('bg-page'), value('bg-surface'));
   assert.deepEqual(value('glass-bone'), { hex: '#FBF9F6', alpha: 0.78 });
   assert.equal(value('glass-plum').hex, '#432E5C');
   assert(!resolved.has('glass-white'));
@@ -126,10 +127,11 @@ test('readable text and input borders retain the agreed contrast on supported su
     return (pair[0] + 0.05) / (pair[1] + 0.05);
   };
   for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2', 'bg-sunken']) {
-    assert(contrast('fg-3', bg) >= 4.5, `Readable metadata on ${bg}`);
+    assert(contrast('fg-3', bg) >= 7, `Readable metadata on ${bg}`);
   }
   for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2']) {
     assert(contrast('border-input', bg) >= 3, `Input boundary on ${bg}`);
+    assert(contrast('border-card', bg) >= 3, `Card boundary on ${bg}`);
   }
   assert(contrast('fg-inverse', 'plum-500') >= 4.5, 'Primary button label');
 });
