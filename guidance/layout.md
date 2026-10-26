@@ -27,7 +27,7 @@ Fully rounded shapes are reserved for pills and avatars. Tags use the regular me
 
 ## Borders and focus
 
-Use a one-unit hairline in `border-hairline` by default. Inputs use `border-input` at rest, which meets 3:1 against bone. Focus uses `border-brand` and `ring-focus` (a three-unit solid plum ring). Never use colored left-border accents on cards.
+Use a one-unit `border-card` for card and category boundaries. Reserve `border-hairline` for decorative interior separators. Inputs use `border-input` at rest; both input and card boundaries meet 3:1 against adjacent page and card surfaces. Focus uses `border-brand` and `ring-focus` (a three-unit solid plum ring). Never use colored left-border accents on cards.
 
 Keep keyboard focus visible on web and use appropriate native focus/accessibility behavior on iOS. Borders, shadows, and layout should support the hierarchy rather than add decorative chrome.
 
@@ -57,6 +57,6 @@ Reserve the control row (`control-h`) plus `space-2` top padding even without a 
 
 ## Accessibility baseline
 
-Running text must reach 4.5:1 contrast. Use `fg-1` for headings, `fg-2` for helpers, and `fg-3` for metadata, placeholders, countdowns, and disabled labels; `fg-4` aliases `fg-3`. Input boundaries must reach 3:1 against adjacent surfaces; card separators may remain hairlines.
+Running text must reach 4.5:1 contrast; essential card metadata uses the stronger 7:1 target. Use `fg-1` for headings, `fg-2` for helpers, and `fg-3` for metadata, placeholders, countdowns, and disabled labels; `fg-4` aliases `fg-3`. Input boundaries must reach 3:1 against adjacent surfaces; card boundaries must also reach 3:1; interior separators may remain hairlines.
 
 Every interactive control needs visible keyboard focus and at least a 44-unit hit area, including inline links. Underline links in running text. Expose selection state to assistive technology and implement the corresponding keyboard behavior; ARIA roles alone are insufficient. Respect reduced motion as specified in [motion guidance](motion.md).
