@@ -7,7 +7,8 @@ Lucide is the shared icon family. Consuming web and iOS products source the icon
 - Use 1.5 logical-unit strokes, rounded caps and joins, and unfilled shapes.
 - Baseline visual sizes are 16 in dense UI, 20 by default, 24 for prominent controls, and 32–40 for illustrative use.
 - Icon size is separate from the interactive hit area; honor platform accessibility requirements for controls.
-- Icons inherit their foreground color. Use color to signal state, not for decoration.
+- Icons inherit their foreground color. Color may reinforce state, but pair it with a distinct shape or explicit status text.
+- Pair unfamiliar action icons with visible labels. Icon-only controls need an accessible name and a recognizable meaning in context; a tooltip alone does not replace a needed visible label.
 - Do not use emoji, Unicode glyph substitutes, multicolor icons, or decorative icons beside every label.
 
 Shared glyph vocabulary: Activity, Heart, Pill, ClipboardList, CalendarDays, Stethoscope, FileText, Users, MessageSquare, Bell, Settings, ChevronRight, Plus, Search, Check, AlertCircle, TrendingUp, TrendingDown, and Minus.

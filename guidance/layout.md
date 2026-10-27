@@ -13,6 +13,16 @@ Use a four-unit spacing grid and generous whitespace. Shared dimensions are logi
 - Consumer mobile screens do not have fixed side panels.
 - On iOS, use native control sizing, Dynamic Type, and device safe areas. Do not hard-code a tab-bar height that claims to include every device's safe area. Accessible content and controls may grow beyond baseline dimensions.
 
+## Visual hierarchy
+
+Make the page purpose, content groups, and next action recognizable at a glance. Use the [default type hierarchy](typography.md#default-hierarchy) and keep the single primary action distinct from supporting actions.
+
+Group related content through proximity before adding containers. Keep labels, values, units, and help close together; leave larger gaps between unrelated groups. Use cards when content needs a distinct boundary, not around every item. Existing card border and contrast requirements still apply.
+
+Give emphasis a purpose. Do not automatically give every section an eyebrow, large heading, icon, card, and shadow. Reserve display treatment for an intentional focal point, including the onboarding headings below. Make interactive items recognizable through established control shapes, underlined links, or explicit action labels.
+
+Review consuming screens in grayscale: headings, the primary action, selection, and errors must remain distinguishable. Check that status text and chart labels can be understood without decoding colors. This supplements the contrast and accessibility checks below.
+
 ## Radii
 
 | Role | Token |

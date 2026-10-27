@@ -23,6 +23,12 @@ Headings use `weight-heading`, `leading-heading`, and `tracking-heading`. Body u
 
 All numeric data uses IBM Plex Mono and tabular numerals; do not use monospace for ordinary body copy. Proportional prose containing incidental numbers need not become monospace. Identity phone numbers use the body face, formatted with spaces.
 
+## Default hierarchy
+
+For ordinary product screens, start with `text-h1` for the page title, `text-h2` for section headings, `text-body` for content, and `text-caption` for brief metadata. Use `text-h3` and `text-h4` only when the content needs deeper sections. Keep equivalent roles consistent across a screen.
+
+Reserve display sizes for intentional focal points and the specified onboarding headings. Eyebrows should add context rather than repeat the heading. Establish priority through size, weight, and spacing; do not fade supporting text below its required contrast or shrink essential instructions into captions. Use semantic heading structure on web and native accessibility headings on iOS.
+
 ## Platform adaptation
 
 Web converts logical dimensions to CSS pixels as the starting scale and must allow text resizing. iOS uses point baselines mapped to appropriate text styles and Dynamic Type; never disable scaling to preserve a token's exact size. Relative tracking scales with font size, and line-height tokens are multipliers, not fixed point values. See [token units](tokens.md).
