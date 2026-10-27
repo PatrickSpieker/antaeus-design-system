@@ -16,6 +16,7 @@ Use generous whitespace, deep plum accents, warm bone surfaces, muted semantic c
 - Address the reader as “you”; call people “members” internally and in marketing, not “users” or “patients”.
 - Prefer present tense and active voice.
 - Use sentence case for headings and labels. Buttons use sentence-case verbs.
+- Name the action specifically, such as “Save measurement.” Keep instructions short and place essential help beside the relevant field. Omit explanations the layout already communicates, while retaining necessary clinical and safety information.
 - Small eyebrow labels may use uppercase with 8% letter spacing; proper nouns retain their capitalization.
 - Translate clinical terms on first use without erasing the clinical name.
 - No emoji in product chrome. A single intentional editorial glyph may appear in an empty state or celebration; do not use glyphs as interface icons.

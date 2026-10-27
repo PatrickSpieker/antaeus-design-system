@@ -11,6 +11,12 @@
 
 Use semantic tokens such as `bg-page`, `bg-surface`, `fg-1`, and `fg-brand` when the role is known. Palette tokens supply the underlying values; see the [token contract](tokens.md) for aliases.
 
+## Color and meaning
+
+Establish hierarchy in grayscale, then add color for emphasis. Color may reinforce a distinction but must not be its only cue: pair status colors with explicit text, such as “Above range,” and show selection with a checkmark, outline, or other visible marker as well as its accessible state.
+
+Place chart labels beside the data where practical. When a legend is needed, distinguish series with labels, line styles, or marker shapes as well as color. Members should not need to memorize a color code to understand a measurement.
+
 ## Surfaces and cards
 
 Pages use `bg-page` (bone-200, `#EAE4DA`); cards use `bg-surface` (bone-50, `#FBF9F6`). Cards use a one-unit `border-card` (opaque ink-600), `shadow-sm`, `radius-lg`, and `space-6` padding. The outline must remain visible without a shadow. No opaque pure-white backgrounds. Use `bg-surface-2` and `bg-sunken` for secondary and recessed surfaces.
