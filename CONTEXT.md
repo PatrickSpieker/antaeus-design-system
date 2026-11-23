@@ -26,7 +26,10 @@ The published entry point is `/index.md`, with `/tokens.json`, `/guidance/…`, 
 
 ## Design decisions
 
-- Default cards use bone-50 (`#FBF9F6`) against a bone-200 (`#EAE4DA`) page. Card outlines use opaque ink-600, and essential metadata uses ink-700. This supersedes the same-color page/card decision after the October 25, 2026 readability review.
+- The five “Onboarding Today” rows in the [Antaeus Health Figma](https://www.figma.com/design/tk7l50vfqxiItsHWQBTbGS/Antaeus-Health?node-id=301-2) set global visual defaults, as agreed November 23, 2026. Pages use bone-50; cards and inputs use white; boundaries use translucent ink; metadata uses ink-600. This supersedes the October 25 readability treatment.
+- The lower boundary and metadata contrast is intentional and documented, not represented as meeting the former 3:1/7:1 requirements. Running text retains a 4.5:1 minimum.
+- Icon strokes vary by role. Placeholder/camera leading is explicit, and the isolated 15-unit gap is normalized to 16.
+- This adoption changes only the shared system. Consumer migrations and publication require separate work; delivery is a PR for review.
 - Hover transitions take 140ms; press feedback takes 80ms.
 - Inner shadows are allowed persistently for sunken inputs and temporarily for pressed cards.
 - Entrances and exits must not zoom; buttons may scale to 0.98 for press feedback.
@@ -42,7 +45,7 @@ The published entry point is `/index.md`, with `/tokens.json`, `/guidance/…`, 
 - Use flat plum primary actions, outlined secondary actions, and text tertiary actions, with one primary action per screen.
 - Default controls are 48 logical units; compact hit targets are at least 44. Tab controls are 48 plus the device's actual safe area, subject to native sizing and text scaling.
 - Use the agreed onboarding spacing table in `guidance/layout.md`, including a reserved back-control row.
-- Keep readable text, stronger input boundaries, visible keyboard focus, exposed selection state, and reduced motion.
+- Keep readable text, visible keyboard focus, exposed selection state, and reduced motion; the November 23 Figma decision supersedes the former stronger input boundaries.
 - Menus and sheets use a 24% warm-ink scrim.
 
 These decisions came from reviewing Devin's design addon on September 24, 2026. They live in shared guidance and typed tokens, not reference implementations. Product questions about invite placement, welcome copy, and empty-timeline guidance remain for consuming products.

@@ -5,7 +5,7 @@
 ## Palette
 
 - Plum is the brand accent: primary buttons, active states, and occasional emphasis.
-- Bone is the default canvas and surface color.
+- Bone is the default canvas; white is the default card and input surface.
 - Ink provides warm charcoal text; avoid pure black.
 - Sage signals success or healthy states, amber attention, clay alerts, and sky information. Keep semantic colors muted.
 
@@ -19,9 +19,9 @@ Place chart labels beside the data where practical. When a legend is needed, dis
 
 ## Surfaces and cards
 
-Pages use `bg-page` (bone-200, `#EAE4DA`); cards use `bg-surface` (bone-50, `#FBF9F6`). Cards use a one-unit `border-card` (opaque ink-600), `shadow-sm`, `radius-lg`, and `space-6` padding. The outline must remain visible without a shadow. No opaque pure-white backgrounds. Use `bg-surface-2` and `bg-sunken` for secondary and recessed surfaces.
+Pages use `bg-page` (bone-50, `#FBF9F6`); cards and inputs use `bg-surface` (white, `#FFFFFF`). Cards use a one-unit `border-card` (warm ink at 8%), `shadow-sm`, `radius-lg`, and `space-4` padding. White surfaces are intentional global defaults. Use `bg-surface-2` (bone-100) for message previews and secondary surfaces, and `bg-sunken` (bone-200) for disabled controls. See the component recipes in [layout](layout.md).
 
-Cards have no gradients, colored borders, or colored accent strips. Plum should not form large flat fills on ordinary product screens. A restrained dark plum hero is an explicit exception for onboarding and marketing; use inverse foreground colors there.
+Cards have no gradients or colored accent strips. Selected category cards replace `border-card` with `border-brand` and show a checkmark; the plum outline communicates selection. Plum should not form large flat fills on ordinary product screens. A restrained dark plum hero is an explicit exception for onboarding and marketing; use inverse foreground colors there.
 
 ## Glass
 
@@ -33,7 +33,7 @@ A light hero may use a subtle bone-to-bone-100-to-plum-50 background wash. Glass
 
 All shadows use warm ink (`#1A1814`), never pure black. `shadow-xs` through `shadow-md` are soft, close UI shadows; `shadow-lg` and `shadow-xl` elevate floating panels and modals. Avoid hard drop shadows.
 
-Inner shadows are allowed persistently for sunken inputs and temporarily for card presses. [Motion guidance](motion.md) defines interaction timing.
+Inputs use `shadow-inset` persistently; card presses may use it temporarily. Back controls and unselected relationship pills use `shadow-xs`; primary buttons remain flat. Preserve the Figma layer order encoded in `shadow-xs` and `shadow-sm` (the tighter layer first). [Motion guidance](motion.md) defines interaction timing.
 
 ## Menu and sheet overlays
 
@@ -41,6 +41,19 @@ Use `scrim`, warm ink at 24% opacity, behind menus and sheets. It keeps the unde
 
 ## Readable card content
 
-Use `fg-1` for titles and `fg-2`/`fg-3` for supporting text. Metadata is essential content: `fg-3` now uses ink-700, with at least 7:1 contrast on supported opaque surfaces. Establish hierarchy through size, weight and spacing rather than faded text or added opacity.
+Use `fg-1` for titles, `fg-2` for ordinary helpers, and `fg-3` (ink-600, `#6B6558`) for metadata, placeholders, muted helpers, and disabled labels. `fg-4` aliases `fg-3`; `fg-eyebrow` also uses ink-600. Do not add opacity to these foregrounds.
 
-Use `border-card` for both static cards and interactive category/summary cards. It must reach at least 3:1 against the page and card surfaces. Hairlines remain appropriate only for decorative interior separators; they are not card boundaries. Shadows supplement the outline and never replace it. Native system-owned controls retain their platform rendering.
+The Figma defaults intentionally replace the former 7:1 metadata and 3:1 boundary requirements. This is a visual choice, not a claim of WCAG non-text contrast compliance. Running text still requires at least 4.5:1. On supported opaque surfaces, ink-600 measures:
+
+| Surface | Contrast |
+|---|---|
+| White (`bg-surface`) | 5.79:1 |
+| Bone-50 (`bg-page`) | 5.51:1 |
+| Bone-100 (`bg-surface-2`) | 5.15:1 |
+| Bone-200 (`bg-sunken`) | 4.58:1 |
+
+Card outlines use ink-900 at 8% alpha; input outlines use ink-900 at 12% alpha. Composite the border onto its surface before measuring: on white, the card outline is about 1.18:1 and the input outline about 1.28:1. Neither reaches 3:1. Focus still uses the solid plum ring. Native system-owned controls retain their platform rendering; product accessibility review must account for the low-contrast resting boundaries.
+
+## Camera treatment
+
+Camera placeholders use `bg-camera` (`#26212B`), `radius-lg`, and no card shadow. Instructions and the face-guide outline use `fg-camera` (white); ordinary inverse labels continue to use `fg-inverse` (bone-50). These camera-specific colors do not replace the dark-plum hero palette. Real camera imagery has variable contrast and needs its own review.

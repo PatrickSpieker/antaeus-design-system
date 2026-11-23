@@ -11,8 +11,8 @@ const document = JSON.parse(readFileSync(join(root, 'tokens.json'), 'utf8'));
 test('agreed palette, font and interaction values survive the migration', () => {
   const resolved = resolveTokens(document);
   const value = name => resolved.get(name).value;
-  assert.deepEqual(value('bg-surface'), { hex: '#FBF9F6', alpha: 1 });
-  assert.deepEqual(value('bg-page'), value('bone-200'));
+  assert.deepEqual(value('bg-surface'), { hex: '#FFFFFF', alpha: 1 });
+  assert.deepEqual(value('bg-page'), value('bone-50'));
   assert.notDeepEqual(value('bg-page'), value('bg-surface'));
   assert.deepEqual(value('glass-bone'), { hex: '#FBF9F6', alpha: 0.78 });
   assert.equal(value('glass-plum').hex, '#432E5C');
@@ -25,7 +25,8 @@ test('agreed palette, font and interaction values survive the migration', () => 
   assert.equal(value('font-body'), 'Inter');
   assert.equal(value('font-sans'), 'Inter');
   assert.equal(value('font-mono'), 'IBM Plex Mono');
-  assert.equal(value('leading-display'), 1.15);
+  assert.equal(value('leading-display'), 1.08);
+  assert.equal(value('leading-display-s'), 1.25);
   assert.equal(value('control-h').value, 48);
   assert.equal(value('target-min').value, 44);
   assert.equal(value('tabbar-control-h').value, 48);
@@ -42,7 +43,7 @@ test('agreed palette, font and interaction values survive the migration', () => 
 test('CSS translates structured units, colors, aliases, timing curves and shadows', () => {
   const css = generateCSS(document);
   for (const declaration of [
-    '--bg-surface: var(--bone-50);', '--space-6: 24px;', '--dur-press: var(--dur-instant);',
+    '--bg-surface: var(--white);', '--space-6: 24px;', '--dur-press: var(--dur-instant);',
     '--dur-instant: 80ms;', '--tracking-display: -0.02em;', '--leading-body: 1.55;',
     '--font-heading: "IBM Plex Sans";', '--font-body: "Inter";', '--font-sans: var(--font-body);', '--font-mono: "IBM Plex Mono";', '--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);',
     '--glass-bone: rgba(251, 249, 246, 0.78);',
@@ -113,25 +114,69 @@ test('broken documentation links fail validation', () => {
 });
 
 
-test('readable text and input borders retain the agreed contrast on supported surfaces', () => {
-  const resolved = resolveTokens(document);
-  const luminance = name => {
-    const { hex, alpha } = resolved.get(name).value;
-    assert.equal(alpha, 1);
-    return hex.slice(1).match(/../g).map(v => parseInt(v, 16) / 255)
-      .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
-      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
-  };
-  const contrast = (a, b) => {
-    const pair = [luminance(a), luminance(b)].sort((a, b) => b - a);
-    return (pair[0] + 0.05) / (pair[1] + 0.05);
-  };
-  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2', 'bg-sunken']) {
-    assert(contrast('fg-3', bg) >= 7, `Readable metadata on ${bg}`);
+const resolved = resolveTokens(document);
+const value = name => resolved.get(name).value;
+const rgb = color => color.hex.slice(1).match(/../g).map(v => parseInt(v, 16) / 255);
+const luminance = channels => channels
+  .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+  .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+// Composite translucent foregrounds in sRGB before calculating relative luminance.
+const contrast = (foreground, background) => {
+  const fg = value(foreground), bg = value(background);
+  assert.equal(bg.alpha, 1);
+  const backdrop = rgb(bg);
+  const composite = rgb(fg).map((channel, i) => channel * fg.alpha + backdrop[i] * (1 - fg.alpha));
+  const [high, low] = [luminance(composite), luminance(backdrop)].sort((a, b) => b - a);
+  return (high + 0.05) / (low + 0.05);
+};
+
+test('Figma typography, camera and icon roles resolve to the agreed baselines', () => {
+  assert(Math.abs(value('text-display-m').value * value('leading-display') - 41.04) < 1e-9);
+  assert.equal(value('text-display-s').value * value('leading-display-s'), 36.25);
+  assert.equal(value('text-metadata').value, 13);
+  assert.equal(value('text-caption').value, 12);
+  assert.equal(value('weight-metadata'), 400);
+  assert.equal(value('weight-caption'), 400);
+  assert.equal(value('weight-medium'), 500);
+  assert.equal(value('text-camera').value, 14);
+  assert.equal(value('leading-tight'), 1.35);
+  assert.deepEqual(value('bg-camera'), { hex: '#26212B', alpha: 1 });
+  assert.deepEqual(value('fg-camera'), { hex: '#FFFFFF', alpha: 1 });
+  for (const [role, stroke] of Object.entries({ default: 1.5, back: 1.25, prominent: 2, 'check-small': 1.666667, confirmation: 1 })) {
+    assert.equal(value(`icon-stroke-${role}`).value, stroke);
   }
-  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2']) {
-    assert(contrast('border-input', bg) >= 3, `Input boundary on ${bg}`);
-    assert(contrast('border-card', bg) >= 3, `Card boundary on ${bg}`);
+  const css = generateCSS(document);
+  assert(css.includes('--leading-display-s: var(--leading-heading);'));
+  assert(css.includes('--text-metadata: var(--text-body-s);'));
+  assert(css.includes('--icon-stroke-check-small: 1.666667px;'));
+  assert(css.includes('--bg-camera: #26212B;'));
+});
+
+test('Figma shadow layer order survives CSS generation', () => {
+  const css = generateCSS(document);
+  assert(css.includes('--shadow-xs: 0px 1px 1px 0px rgba(26, 24, 20, 0.03), 0px 1px 2px 0px rgba(26, 24, 20, 0.04);'));
+  assert(css.includes('--shadow-sm: 0px 1px 2px 0px rgba(26, 24, 20, 0.04), 0px 2px 6px 0px rgba(26, 24, 20, 0.05);'));
+});
+
+test('Figma text retains 4.5:1 while the lower boundary contrast is explicit', () => {
+  assert.deepEqual(value('fg-3'), value('ink-600'));
+  assert.deepEqual(value('fg-eyebrow'), value('ink-600'));
+  assert.deepEqual(value('border-card'), { hex: '#1A1814', alpha: 0.08 });
+  assert.deepEqual(value('border-input'), { hex: '#1A1814', alpha: 0.12 });
+  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2', 'bg-sunken']) {
+    for (const fg of ['fg-1', 'fg-2', 'fg-3']) assert(contrast(fg, bg) >= 4.5, `${fg} on ${bg}`);
+    assert(contrast('fg-3', bg) < 7, `Do not claim the former metadata target on ${bg}`);
+    for (const border of ['border-input', 'border-card']) assert(contrast(border, bg) < 3, `Document low-contrast ${border} on ${bg}`);
   }
   assert(contrast('fg-inverse', 'plum-500') >= 4.5, 'Primary button label');
+  assert(contrast('fg-camera', 'bg-camera') >= 4.5, 'Camera placeholder instruction');
+  for (const bg of ['bg-page', 'bg-surface', 'bg-surface-2']) assert(contrast('border-brand', bg) >= 3, 'Focus and selection outline');
+});
+
+test('published contrast measurements match the actual composited colors', () => {
+  const guidance = readFileSync(join(root, 'guidance/color.md'), 'utf8');
+  for (const [fg, bg] of [
+    ['fg-3', 'bg-surface'], ['fg-3', 'bg-page'], ['fg-3', 'bg-surface-2'], ['fg-3', 'bg-sunken'],
+    ['border-card', 'bg-surface'], ['border-input', 'bg-surface'],
+  ]) assert(guidance.includes(`${contrast(fg, bg).toFixed(2)}:1`), `Document ${fg} on ${bg}: ${contrast(fg, bg).toFixed(2)}:1`);
 });
