@@ -14,10 +14,12 @@ Agents start with [SKILL.md](SKILL.md) and fetch the focused guidance needed for
 
 ## Current design direction
 
+Global visual defaults follow the five Figma “Onboarding Today” rows; see [source and normalizations](guidance/tokens.md#visual-source-and-normalization).
+
 - [Typography](guidance/typography.md): IBM Plex Sans headings, Inter body and controls, IBM Plex Mono metrics. `font-serif` is removed; `font-sans` aliases `font-body`.
-- [Color](guidance/color.md): bone pages and cards, plum primary actions, warm-ink shadows, and a 24% warm-ink scrim for menus and sheets.
+- [Color](guidance/color.md): bone-50 pages, white cards and inputs, plum primary actions, warm-ink shadows, and a 24% warm-ink scrim for menus and sheets.
 - [Layout](guidance/layout.md): one primary action per screen, shared onboarding spacing, 48-unit control baselines, and 44-unit minimum hit areas. Tab controls add the device's actual safe area.
-- [Accessibility](guidance/layout.md#accessibility-baseline): readable text, stronger input borders, solid focus rings, exposed selection state, and accessible sizing.
+- [Accessibility](guidance/layout.md#accessibility-baseline): readable text, intentionally subtle resting borders with documented contrast, solid focus rings, exposed selection state, and accessible sizing.
 - [Motion](guidance/motion.md): 140ms hover and 80ms press feedback, with reduced-motion adaptation and no zooming entrances or exits.
 
 ## Authoring

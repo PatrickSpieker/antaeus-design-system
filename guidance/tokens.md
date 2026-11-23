@@ -40,3 +40,13 @@ Only the latest definitions are published. There are no versioned endpoint paths
 Use `font-heading`, `font-body`, and `font-mono` for type roles. The former `font-serif` token is removed; `font-sans` now aliases `font-body` (Inter). Font names do not trigger downloads.
 
 The control and tap-target tokens are logical minimum baselines. `tabbar-control-h` supplies only the content height: web adds `env(safe-area-inset-bottom)`, while iOS uses its native safe-area inset. Device-dependent expressions do not belong in platform-neutral JSON.
+
+## Visual source and normalization
+
+The five “Onboarding Today” rows in [Antaeus Health Figma](https://www.figma.com/design/tk7l50vfqxiItsHWQBTbGS/Antaeus-Health?node-id=301-2) are the approved visual source for global defaults (decision: November 23, 2026). The inspected rows are `328:2`, `328:3`, `333:43`, `351:2`, and `351:255`: 38 screens. Figma supplies visual intent; this JSON is the machine-readable contract. Future Figma edits require an explicit reviewed synchronization, not a runtime dependency.
+
+This adoption covers visible typography, surfaces, borders, effects, radii, spacing, and icon strokes. Hidden layers and absent Figma style bindings are not new system requirements. Existing motion, focus, text scaling, and accessibility semantics remain required; static Figma frames cannot establish runtime behavior.
+
+Intentional normalizations: placeholders use explicit `leading-tight` rather than AUTO; camera instructions use `text-camera` with `leading-tight`; the isolated 15-unit gap becomes 16. Small-check strokes round 5/3 to 1.666667 logical units. Pixel-font metrics and content-driven fractional bounds are not spacing tokens.
+
+Consumers migrating from the previous defaults should account for white `bg-surface`, bone-50 `bg-page`, ink-600 `fg-3`, translucent boundary aliases, and the split between `leading-display` and `leading-display-s`. General metadata now uses `text-metadata`; `text-caption` remains the smaller recipient caption. Figma-specific camera colors and role-specific icon strokes are explicit tokens. This repository change does not update bundled snapshots in consuming applications.
